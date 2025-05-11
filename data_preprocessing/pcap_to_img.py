@@ -37,21 +37,23 @@ def dataframe_to_png(df, output_file):
     np_img = np.full((padded_height, width, 4), (0, 0, 255, 255), dtype=np.uint8)
     np_df = np.array(df.applymap(np.array).to_numpy().tolist())
     np_img[:height, :, :] = np_df
-
+    print(np_img.shape)
+    #print(np_img)
     # Create a new image with padded height filled with blue pixels
     img = Image.fromarray(np_img, 'RGBA')
-
+    #print(img)
     # Check if file exists and generate a new file name if necessary
     file_exists = True
-    counter = 1
+    counter = 0
     file_path, file_extension = os.path.splitext(output_file)
     while file_exists:
         if os.path.isfile(output_file):
             output_file = f"{file_path}_{counter}{file_extension}"
             counter += 1
+            print("counter:", counter)
         else:
             file_exists = False
-
+    print(output_file)
     img.save(output_file)
 
 
@@ -100,7 +102,8 @@ for i in os.listdir(data_dir):
         nprint = '../data/preprocessed_fine_tune_nprints/'+i.split('.pcap')[0]+'.nprint'
         print(pcap)
         print('Creating nPrint for pcap')
-        subprocess.run('nprint -F -1 -P {0} -4 -i -6 -t -u -p 0 -c 1024 -W {1}'.format(pcap, nprint), shell=True)
+        #subprocess.run('nprint -F -1 -P {0} -4 -t -p 0 -c 1024 -W {1}'.format(pcap, nprint), shell=True)
+        subprocess.run('nprint -F -1 -P {0} -4 -i -6 -t -u -R -p 0 -c 1024 -W {1}'.format(pcap, nprint), shell=True)
             
 
 nprint_dir = '../data/preprocessed_fine_tune_nprints'
@@ -111,6 +114,7 @@ for i in os.listdir(nprint_dir):
         nprint_path = nprint_dir+'/'+i
         df = pd.read_csv(nprint_path)
         num_packet = df.shape[0]
+        print(df.shape)
         if num_packet != 0:
             try:
                 substrings = ['ipv4_src', 'ipv4_dst', 'ipv6_src', 'ipv6_dst','src_ip']
@@ -123,7 +127,8 @@ for i in os.listdir(nprint_dir):
                 for col in cols:
                     df[col] = df[col].apply(int_to_rgba)
 
-                output_file = "../data/preprocessed_fine_tune_imgs/"+service_name+".png"
+                output_file = "/home/etbert/netDiffusion/NetDiffusion_Generator/data/preprocessed_fine_tune_imgs/"+service_name+".png"
                 dataframe_to_png(df, output_file)
             except:
+                print("no_packets")
                 continue

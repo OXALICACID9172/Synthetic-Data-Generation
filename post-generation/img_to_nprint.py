@@ -96,10 +96,13 @@ def png_to_dataframe(input_file):
 
 
 org_dir = '../data/color_processed_generated_imgs/'
+counter=0
 for i in os.listdir(org_dir):
     if 'png' in i:
         input_file = org_dir + i
         reverse_df = png_to_dataframe(input_file)
         output_file = '../data/generated_nprint/' + i.replace('png','nprint')
         reverse_df.to_csv(output_file)
+        counter+=1
+        print(counter)
 

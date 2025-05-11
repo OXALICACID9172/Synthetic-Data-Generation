@@ -57,3 +57,4 @@ for i in os.listdir(org_dir):
         output_file = '../data/color_processed_generated_imgs/' + i
         process_image(input_file, output_file)
         counter +=1
+        print(counter)
