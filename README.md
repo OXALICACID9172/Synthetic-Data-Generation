@@ -54,7 +54,8 @@ bash webui.sh
 # Adjust the script based on fine-tuning task.
 cd ../../ && python3 caption_changing.py
 ```
-
+## Fine-Tuning Directory
+1. Due to size related Issues fine-tune directory is not uploaded. You can download this directory from the following repository https://github.com/arielgoes/NetDiffusion_Generator.git
 ## Fine-Tuning
 ```bash
 # Navigate to fine-tuning directory
