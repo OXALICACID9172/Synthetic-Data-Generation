@@ -1,23 +1,3 @@
-# NetDiffusion: High-Fidelity Synthetic Network Traffic Generation
-
-
-
-<img width="1241" alt="Screenshot 2024-02-29 at 3 41 29 PM" src="https://github.com/noise-lab/NetDiffusion_Generator/assets/47127634/804756f9-156e-4796-bea6-00d5d7bb1706">
-
-
-## Introduction
-
-NetDiffusion is an innovative tool designed to address the challenges of obtaining high-quality, labeled network traces for machine learning tasks in networking. Privacy concerns, data staleness, and the limited availability of comprehensive datasets have long hindered research and development efforts. NetDiffusion leverages a controlled variant of a Stable Diffusion model to generate synthetic network traffic that not only boasts high fidelity but also adheres to protocol specifications.
-
-Our approach outperforms current state-of-the-art synthetic trace generation methods by producing packet captures that exhibit higher statistical similarity to real network traffic. This improvement is crucial for enhancing machine learning model training and performance, as well as for supporting a wide range of network analysis and testing tasks beyond ML-centric applications.
-
-## Features
-
-- **High-Fidelity Synthetic Data:** Generate network traffic that closely resembles real-world data in terms of statistical properties and protocol compliance.
-- **Compatibility:** Produced traces are compatible with common network analysis tools, facilitating easy integration into existing workflows.
-- **Versatility:** Supports a wide array of network tasks, extending the utility of synthetic traces beyond machine learning applications.
-- **Open Source:** NetDiffusion is open-source, encouraging contributions and modifications from the community to meet diverse needs.
-
 ## Installation (Current support for Linux only)
 
 ```bash
@@ -94,6 +74,9 @@ bash gui.sh
 4. Under `LoRA\Training\Parameters\Basic`, adjust the Max Resolution to match the resolution from data preprocessing, e.g., 816,768.
 5. Click on Start Training to begin the fine-tuning. Adjust the fine-tuning parameters as needed due to different generation tasks may have different parameter requirement to yield better synthetic data quality.
 
+## Cuda Compatability Issues
+1. If you are facing issues related to cuda I recommend following the steps in the link provided https://www.reddit.com/r/StableDiffusion/comments/173r5g0/kohya_error_libcudartso_is_not_in_the_ld_library/
+
 ## Generation
 ```bash
 # Copy the fine-tuned LoRA model (adjust path namings as needed) to Stable Diffusion WebUI
@@ -122,6 +105,10 @@ Note that extensive adjustments on the generation and ControlNet parameters may 
 python3 color_processor.py && python3 img_to_nprint.py && python3 mass_reconstruction.py
 ```
 This completes the post-generation pipeline with the final nprints and pcaps stored in `/NetDiffusion_Code/data/replayable_generated_nprints` and `/NetDiffusion_Code/data/replayable_generated_pcaps`, respectively.
+
+## Evaluation
+1. Open the evaluation Folder.
+2. Run new_eval.py with the appropriate paths set.
 
 ## Citing NetDiffusion
 ```
