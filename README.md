@@ -111,6 +111,12 @@ This completes the post-generation pipeline with the final nprints and pcaps sto
 1. Open the evaluation Folder.
 2. Run new_eval.py with the appropriate paths set.
 
+## Time stamp generation
+1. Navigate to the time-stamps folder.
+2. Modify the path the in `gan_gen.py` to the dataset path.
+3. run the gan_gen.py file.
+4. To evaluate the generated timestamps run `evaluate.py` file after setting appropriate paths to the real dataset.
+
 ## Citing NetDiffusion
 ```
 @article{jiang2024netdiffusion,
